@@ -30,3 +30,10 @@ for (i in 1:45) {
 engines = engines%>%mutate(engines, FUEL_LHV = lhv)
 engines = engines%>%arrange(FILE_ID)
 
+# calculate thermal efficiency and add to each data_#.csv
+
+lapply(dta, mutate(THRM_EFF = ))
+
+for (i in 1:213){
+  dta[[i]] = mutate(dta[[i]], THRM_EFF = dta[[i]]$POWER / (dta[[i]]$FUEL_FLOW * engines$FUEL_LHV[i]))
+}
