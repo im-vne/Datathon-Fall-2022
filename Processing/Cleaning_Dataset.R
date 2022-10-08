@@ -3,7 +3,7 @@
 ###  Load in Data
 
 # set path
-path= "Dataset/all_data_v2"
+path = "Dataset/all_data_v2"
 
 # read all csvs
 filenames = list.files(path, pattern="*.csv", full.names=TRUE)
