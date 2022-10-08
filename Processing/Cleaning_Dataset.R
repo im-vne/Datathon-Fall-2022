@@ -39,3 +39,13 @@ engines = engines%>%arrange(ENGINE_IND)
 for (i in 1:213){
   dta[[i]] = mutate(dta[[i]], THRM_EFF = dta[[i]]$POWER / (dta[[i]]$FUEL_FLOW * engines$FUEL_LHV[i]))
 }
+
+# add mean thermal efficiency to each engine in engines
+averages=c()
+for (i in 1:213) {
+  temp = mean(na.omit(dta[[i]]$THRM_EFF))
+  averages = c(averages, temp)
+  #engines = mutate(engines, AVG_THRM_EFF = mean(na.omit(dta[[i]]$THRM_EFF)))
+}
+
+engines = mutate(engines, AVG_THRM_EFF = averages)
