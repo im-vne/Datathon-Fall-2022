@@ -17,3 +17,16 @@ names(dta) = paste0("data_", 1:213)
 engines = read.csv("Dataset/engine_data.csv")
 sites = read.csv("Dataset/site_data.csv")
 
+# assigning LHV from sites to engines table
+
+engine.counts = table(engines$PLANT_NAME)
+
+temp.sites = sites%>%arrange(sites$PLANT_NAME)
+engines = engines%>%arrange(engines$PLANT_NAME)
+lhv = c()
+for (i in 1:45) {
+  lhv = c(lhv, rep(temp.sites$FUEL_LHV[i], engine.counts[i]))
+}
+engines = engines%>%mutate(engines, FUEL_LHV = lhv)
+engines = engines%>%arrange(FILE_ID)
+
