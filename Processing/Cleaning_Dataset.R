@@ -19,6 +19,9 @@ sites = read.csv("Dataset/site_data.csv")
 
 # assigning LHV from sites to engines table
 
+# keep track of order
+ind = c(1:213)
+engines = engines%>%mutate(ENGINE_IND = ind)
 engine.counts = table(engines$PLANT_NAME)
 
 temp.sites = sites%>%arrange(sites$PLANT_NAME)
@@ -27,8 +30,9 @@ lhv = c()
 for (i in 1:45) {
   lhv = c(lhv, rep(temp.sites$FUEL_LHV[i], engine.counts[i]))
 }
+
 engines = engines%>%mutate(engines, FUEL_LHV = lhv)
-engines = engines%>%arrange(FILE_ID)
+engines = engines%>%arrange(ENGINE_IND)
 
 # calculate thermal efficiency and add to each data_#.csv
 
