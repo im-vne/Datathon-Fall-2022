@@ -12,3 +12,5 @@ dta = lapply(filenames, read.csv)
 # change names for easier access
 names(dta) = paste0("data_", 1:213)
 
+sites = read.csv("Dataset/engine_data.csv")
+engines = read.csv("Dataset/site_data.csv")
