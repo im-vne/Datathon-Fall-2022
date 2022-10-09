@@ -53,3 +53,4 @@ for (i in 1:213) {
 }
 
 engines = mutate(engines, AVG_THRM_EFF = avgs.thrmeff, AVG_CO2 = avgs.co2)
+engines = mutate(engines, CO2_THRMEFF_RATE = AVG_CO2/AVG_THRM_EFF)
