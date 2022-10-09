@@ -40,23 +40,16 @@ for (i in 1:213){
   dta[[i]] = mutate(dta[[i]], THRM_EFF = dta[[i]]$POWER / (dta[[i]]$FUEL_FLOW * engines$FUEL_LHV[i]))
 }
 
-engine_avg = c()
-for(i in 1:length(dta)){
-  engine_mean = mean(na.omit(dta[[i]][,5]))
-  engine_avg = c(engine_avg,engine_mean)
-}
-
 engines = engines%>% mutate(AVG_CO2 = engine_avg)
 # add mean thermal efficiency and average co2 to each engine in engines
 avgs.thrmeff = c()
 avgs.co2 = c()
 for (i in 1:213) {
   temp.thrmeff = mean(na.omit(dta[[i]]$THRM_EFF))
-  avgs.thrmeff = c(avgs.thrmeff, temp)
+  avgs.thrmeff = c(avgs.thrmeff, temp.thrmeff)
   
-  temp.co2 = mean(na.omit(dta[[i]]['CO2']))
+  temp.co2 = mean(na.omit(dta[[i]]$CO2))
   avgs.co2 = c(avgs.co2, temp.co2)
 }
 
-engines = mutate(engines, AVG_THRM_EFF = avgs.thrmeff)
-engines = mutate(engines, AVG_CO2 = avgs.co2)
+engines = mutate(engines, AVG_THRM_EFF = avgs.thrmeff, AVG_CO2 = avgs.co2)
